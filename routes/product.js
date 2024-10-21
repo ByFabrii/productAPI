@@ -32,10 +32,10 @@ router.route("/product/:id").get(getProductByID);
 
 // Add New Product
 const postProduct = (request, response) => {
-    const { name, imagen, descripcion, price } = request.body;
+    const { name, imagen, description, price } = request.body;
     connection.query(
-        "INSERT INTO product(name, imagen, descripcion, price) VALUES (?, ?, ?, ?)",
-        [name, imagen, descripcion, price],
+        "INSERT INTO product(name, imagen, description, price) VALUES (?, ?, ?, ?)",
+        [name, imagen, description, price],
         (error, results) => {
             if (error) throw error;
             response.status(201).json({ message: "Producto añadido correctamente", affectedRows: results.affectedRows });
@@ -60,11 +60,11 @@ router.route("/product/:id").delete(delProduct);
 
 // Update all fields of a product
 const updateProduct = (request, response) => {
-    const { name, imagen, descripcion, price } = request.body;
+    const { name, imagen, description, price } = request.body;
     const id = request.params.id;
     connection.query(
-        "UPDATE product SET name = ?, descripcion = ?, imagen = ?, price = ? WHERE id = ?",
-        [name, descripcion, imagen, price, id],
+        "UPDATE product SET name = ?, description = ?, imagen = ?, price = ? WHERE id = ?",
+        [name, description, imagen, price, id],
         (error, results) => {
             if (error) throw error;
             response.status(200).json({ message: `Producto con ID ${id} actualizado` });
@@ -78,13 +78,13 @@ router.route("/product/:id").put(updateProduct);
 // Update a single field of the product
 const patchProduct = (request, response) => {
     const id = request.params.id;
-    const { name, imagen, descripcion, price } = request.body;
+    const { name, imagen, description, price } = request.body;
 
     const fieldsToUpdate = [];
     const valuesToUpdate = [];
 
     if (name !== undefined) fieldsToUpdate.push("name = ?"), valuesToUpdate.push(name);
-    if (descripcion !== undefined) fieldsToUpdate.push("descripcion = ?"), valuesToUpdate.push(descripcion);
+    if (description !== undefined) fieldsToUpdate.push("description = ?"), valuesToUpdate.push(description);
     if (imagen !== undefined) fieldsToUpdate.push("imagen = ?"), valuesToUpdate.push(imagen);
     if (price !== undefined) fieldsToUpdate.push("price = ?"), valuesToUpdate.push(price);
 
