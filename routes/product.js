@@ -83,6 +83,7 @@ const patchProduct = (request, response) => {
     const fieldsToUpdate = [];
     const valuesToUpdate = [];
 
+    
     if (name !== undefined) fieldsToUpdate.push("name = ?"), valuesToUpdate.push(name);
     if (description !== undefined) fieldsToUpdate.push("description = ?"), valuesToUpdate.push(description);
     if (imagen !== undefined) fieldsToUpdate.push("imagen = ?"), valuesToUpdate.push(imagen);
